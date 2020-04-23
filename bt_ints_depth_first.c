@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "binary_tree.h"
+#include "binarytree.h"
 
 
 /* a helper function that will add two linked lists together*/
@@ -25,7 +25,7 @@ linked list of the integers contained in the BT in the following order:
 for each node the list should contain the integer contained in the left subtree
 preceding the integer at the node preceding the integer contained in the right subtree.*/
 
-list* bt_ints_depth_first(Bin_tree* BT){
+list* bt_ints_depth_first(Bin_Tree* BT){
   list* finlist = (list*) malloc(sizeof(list));
   if (BT == NULL)
     return NULL;
@@ -33,7 +33,7 @@ list* bt_ints_depth_first(Bin_tree* BT){
   with the integer in the right subtree*/
   else {
     finlist->first = BT->value;
-    finlist->rest = bt_ints_depth_first(BT-left);
+    finlist->rest = bt_ints_depth_first(BT->left);
     return adding_llists(finlist, bt_ints_depth_first(BT->right));
   }
 }

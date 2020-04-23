@@ -2,12 +2,12 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
-#include "binary_tree.h"
+#include "binarytree.h"
 
 /*This function will take a pointer to a linked list of integers and returns a boolean which is true if the elements of the list are (strictly) in ascending order and false otherwise*/
 bool ascending(list* listval){
   // check whether the list has finished and still in ascending order
-  if (listval == NULL or listval->rest == NULL)
+  if (listval == NULL || listval->rest == NULL)
     return true;
   // check for strictly ascending order and sends rest of list back to function
   else if (listval->first < listval->rest->first)
