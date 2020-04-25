@@ -6,12 +6,12 @@ For step 10 I took code from https://gist.github.com/VictorGarritano/5f894be162d
 
 ### Sources:
 
-https://www.programiz.com/c-programming/c-dynamic-memory-allocation
-https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B
-https://www.geeksforgeeks.org/generating-random-number-range-c/
-https://www.tutorialspoint.com/cprogramming/c_functions.htm
-https://www.codesdope.com/c-structure/
-https://www.geeksforgeeks.org/binary-tree-set-1-introduction/
-https://www.youtube.com/watch?v=9RHO6jU--GU
-https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html
-https://gist.github.com/VictorGarritano/5f894be162d39e9bdd5c
+1. https://www.programiz.com/c-programming/c-dynamic-memory-allocation
+2. https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B
+3. https://www.geeksforgeeks.org/generating-random-number-range-c/
+4. https://www.tutorialspoint.com/cprogramming/c_functions.htm
+5. https://www.codesdope.com/c-structure/ 
+6. https://www.geeksforgeeks.org/binary-tree-set-1-introduction/
+7. https://www.youtube.com/watch?v=9RHO6jU--GU
+8. https://www.gnu.org/software/make/manual/html_node/Simple-Makefile.html
+9. https://gist.github.com/VictorGarritano/5f894be162d39e9bdd5c
