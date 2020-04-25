@@ -1,3 +1,3 @@
 # Assignment5
 
-Binary trees in C
+In this assigment we needed to implement binarytrees in C. It was needed to make different functions and procedures to do different things concerning binary (search) trees. If the repository is cloned it is possible to use the "make" command. It will run the main function and put the output in main. The output consists of examples for every part of the assignment. With the command "./main" you will see this output. To clean the output you can use the command "make clean" on the linux command line.  
