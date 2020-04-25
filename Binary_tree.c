@@ -95,16 +95,21 @@ Bin_Tree* bst_insert_randoms(int n){
 /* a helper function that will add two linked lists together*/
 
 list* adding_llists(list* Linklist1,list* Linklist2){ 
-  list* final_list = Linklist1;
+  list* final_list = (list*) malloc(sizeof(list));
   //check whether lists are empthy
   if (Linklist1 == NULL)
     return Linklist2;
   else if (Linklist2 == NULL)
     return Linklist1;
   //going to end of first list and appending Linklist2
-  while(final_list->rest!=NULL){
-    final_list = final_list->rest;}
-  final_list->rest = Linklist2;
+  else if (Linklist1->rest == NULL){
+    final_list->first = Linklist1->first;
+    final_list->rest= Linklist2;
+  }
+  else{
+    final_list->first=Linklist1->first;
+    final_list->rest = adding_llists(Linklist1->rest, Linklist2);
+  }
   return final_list;
 }
     
@@ -122,8 +127,8 @@ list* bt_ints_depth_first(Bin_Tree* BT){
   with the integer in the right subtree*/
   else {
     finlist->first = BT->value;
-    finlist->rest = bt_ints_depth_first(BT->left);
-    return adding_llists(finlist, bt_ints_depth_first(BT->right));
+    finlist->rest = bt_ints_depth_first(BT->right);
+    return adding_llists(bt_ints_depth_first(BT->left),finlist);
   }
 }
 //helperfunction that will find the maximum between two integers
@@ -143,7 +148,10 @@ int depth_help(Bin_Tree* Tree, int le){
     return max(depth_help(Tree->left, le +1), depth_help(Tree->right,le+1));
 }
 
-/*function bt_depth that will find the the lenth of the long*/
+/*function bt_depth that will find the the lenth of the longest path*/
+int bt_depth(Bin_Tree* Tree){
+  return help_level(Tree,0);
+}
 
 //this will help to find the level of an integer
 list* help_level(Bin_Tree* Tree , int le){
@@ -158,12 +166,16 @@ list* help_level(Bin_Tree* Tree , int le){
     return adding_llists(help_level(Tree->left,le-1), help_level(Tree->right,le-1));
   }
 }
+/*function bt_depth that will find the the lenth of the longest path*/
+int bt_depth(Bin_Tree* Tree){
+  return help_level(Tree,0);
+}
 			
 /*  a C procedure bt_ints_breadth_first which takes a pointer to a BT and returns a pointer to a linked list of the integers contained in the BT in the following order: each node the list should be preceded by all nodes shallower in the tree and succeeded by all nodes deeper in the tree. */ 
 list* bt_ints_breadth_first(Bin_Tree* bintree) {
   int i, row;
   list* finlist = (list*) malloc(sizeof(list));
-  row = help_level(bintree,0);
+  row = bt_depth(bintree);
   for (i=0;i<row;i++)
     finlist=adding_llists(finlist,help_level(bintree,i));
   return finlist;
@@ -176,17 +188,13 @@ bool bst_contains(int n, Bin_Tree* bintr) {
   
   else if (n == bintr->value)
     return true;
-  else if (n < bintr->value){
+  else if (n > bintr->value){
     return bst_contains(n, bintr->right);
   }
-  else if (n > bintr->value){
+  else if (n < bintr->value){
     return bst_contains(n, bintr->left);
     }
 }
-
-
-
-
 
 // this function prints the bst in order.
 void printerbst(Bin_Tree *bst){
@@ -209,11 +217,20 @@ int main() {
   b_node->right = NULL;
   insert_bst(3,b_node);
   insert_bst(5,b_node);
+  insert_bst(1,b_node);
+  insert_bst(20,b_node);
+  insert_bst(30,b_node);
+  insert_bst(12,b_node);
+  insert_bst(13,b_node);
   printerbst(b_node);
   printf("This is a tree with 3 nodes printed in order\n");
   Bin_Tree* randtest = bst_insert_randoms(10);
   printerbst(randtest);
   printf("This is a random generated tree with 10 nodes printed in order\n");
-
+  //printf(
+  print_list(bt_ints_depth_first(b_node));
+  print_list(bt_ints_breadth_first(b_node));
+  if (bst_contains(20,b_node)) printf("20 is in the bst\n");
+  
 }
    
