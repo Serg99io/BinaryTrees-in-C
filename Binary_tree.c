@@ -215,7 +215,7 @@ void printerbst(Bin_Tree *bst){
   }
 }
 
-int main() {
+/*int main() {
   list* lis = make_random_list(3);
   print_list(lis);
   if (ascending(lis)) printf("Step1:\n this is an ascending list\n");
@@ -251,5 +251,6 @@ int main() {
   if (bst_contains(20,b_node)) printf("20 is in the former created tree T (checked with bst_contains)\n");
 
   step9();
-}
+  }
+*/
    
