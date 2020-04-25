@@ -147,11 +147,11 @@ int depth_help(Bin_Tree* Tree, int le){
   else
     return max(depth_help(Tree->left, le +1), depth_help(Tree->right,le+1));
 }
-
 /*function bt_depth that will find the the lenth of the longest path*/
 int bt_depth(Bin_Tree* Tree){
-  return help_level(Tree,0);
+  return depth_help(Tree,0);
 }
+
 
 //this will help to find the level of an integer
 list* help_level(Bin_Tree* Tree , int le){
@@ -166,10 +166,6 @@ list* help_level(Bin_Tree* Tree , int le){
     return adding_llists(help_level(Tree->left,le-1), help_level(Tree->right,le-1));
   }
 }
-/*function bt_depth that will find the the lenth of the longest path*/
-int bt_depth(Bin_Tree* Tree){
-  return help_level(Tree,0);
-}
 			
 /*  a C procedure bt_ints_breadth_first which takes a pointer to a BT and returns a pointer to a linked list of the integers contained in the BT in the following order: each node the list should be preceded by all nodes shallower in the tree and succeeded by all nodes deeper in the tree. */ 
 list* bt_ints_breadth_first(Bin_Tree* bintree) {
@@ -178,7 +174,7 @@ list* bt_ints_breadth_first(Bin_Tree* bintree) {
   row = bt_depth(bintree);
   for (i=0;i<row;i++)
     finlist=adding_llists(finlist,help_level(bintree,i));
-  return finlist;
+  return finlist->rest;
 }
 
 //This function will check whether bst contains a certain integer.
@@ -196,6 +192,20 @@ bool bst_contains(int n, Bin_Tree* bintr) {
     }
 }
 
+//Step 9 in the assignment:
+
+void step9(){
+  Bin_Tree* tree1=NULL;
+  int i;
+  //makin a tree with 0..99 inserted one by one
+  for (i=0;i<100;++i)
+    tree1 = insert_bst(i,tree1);
+  //making a random tree with 0..99
+  Bin_Tree* tree2 = bst_insert_randoms(100);
+  printf("The tree when using bst_insert had a depth of: %d \n", bt_depth(tree1));
+  printf("The tree when using bst_insert_random had a depth of: %d \n", bt_depth(tree2));
+}
+
 // this function prints the bst in order.
 void printerbst(Bin_Tree *bst){
   if (bst != NULL){
@@ -208,7 +218,7 @@ void printerbst(Bin_Tree *bst){
 int main() {
   list* lis = make_random_list(3);
   print_list(lis);
-  if (ascending(lis)) printf("this is an ascending list\n");
+  if (ascending(lis)) printf("Step1:\n this is an ascending list\n");
   else printf("this list is not ascending\n");
 
   Bin_Tree *b_node = malloc(sizeof(Bin_Tree));
@@ -222,15 +232,24 @@ int main() {
   insert_bst(30,b_node);
   insert_bst(12,b_node);
   insert_bst(13,b_node);
+  printf("This is a tree T with 8 nodes made by insert bst\n");
   printerbst(b_node);
-  printf("This is a tree with 3 nodes printed in order\n");
   Bin_Tree* randtest = bst_insert_randoms(10);
+  printf("\nThis is a random generated tree R  with 10 nodes printed in order\n");
   printerbst(randtest);
-  printf("This is a random generated tree with 10 nodes printed in order\n");
-  //printf(
-  print_list(bt_ints_depth_first(b_node));
-  print_list(bt_ints_breadth_first(b_node));
-  if (bst_contains(20,b_node)) printf("20 is in the bst\n");
-  
+  list *lst;
+  lst = bt_ints_depth_first(b_node);
+  printf("\nThis is the bt_ints_depth_first list on the former made tree T\n");
+  print_list(lst);
+  list *lst2;
+  lst2 = bt_ints_breadth_first(b_node);
+  printf("This is the bt_ints_breadth_first list on the former made tree T\n");
+  print_list(lst2);
+  int depth = bt_depth(b_node);
+  printf("This is the depth of the former created tree T: %d\n",depth);
+
+  if (bst_contains(20,b_node)) printf("20 is in the former created tree T (checked with bst_contains)\n");
+
+  step9();
 }
    
